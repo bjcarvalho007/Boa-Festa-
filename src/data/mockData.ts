@@ -64,7 +64,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit delicado com painel decorativo "Boy or Girl", pelúcia de urso e suportes dourados.',
     price: 40.00,
     category: 'Festa',
-    image: 'https://lh3.googleusercontent.com/d/1yt3Va2d5t4P7St8LYILTs1vtygRGgmXX',
+    image: 'https://lh3.googleusercontent.com/d/1d4SWl67pNVgiKh4FauIbvV3GCdOFlBgu',
   },
   {
     id: '2',
@@ -96,7 +96,7 @@ export const PRODUCTS: Product[] = [
     description: 'Tema "É uma menina" with decoração floral, pelúcia e painel delicado.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-ursinha-rosa.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1HuEQCSPQssIJHaKiOEenEjnlF4l-_SZ3',
   },
   {
     id: '6',
@@ -128,7 +128,7 @@ export const PRODUCTS: Product[] = [
     description: 'Painel misto rosa e azul com vasos e suportes coordenados.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-ursinhos.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1yt3Va2d5t4P7St8LYILTs1vtygRGgmXX',
   },
   {
     id: '10',
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
     description: 'Decoração feminina moderna com painel glitter rosa e suportes combinando.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-mais-linda.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1H8U5uyZfVCIyjjVqWfX5X1WdNljnbkJ8',
   },
   {
     id: '11',
@@ -144,7 +144,7 @@ export const PRODUCTS: Product[] = [
     description: 'O clássico favorito das crianças com painel alegre e suportes coloridos.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-galinha-pintadinha.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1mEF2c0dXH7-gR5TN00un-hoff064fEOP',
   },
   {
     id: '12',
@@ -152,7 +152,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit Feliz Natal completo para deixar sua ceia ainda mais especial e decorada.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-natal.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1NGbvPG9gf_r8uY_5JEB9Duz3ChDKJ0r4',
   },
 ];
 
