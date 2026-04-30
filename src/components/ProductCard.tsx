@@ -65,17 +65,17 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
 
       <div className="p-6 md:p-10 flex flex-col flex-1">
         <div className="flex justify-between items-start mb-3 gap-4">
-          <h3 className="text-lg md:text-2xl font-display font-black text-gray-900 leading-tight tracking-tighter uppercase">
+          <h3 className="text-base md:text-xl font-display font-black text-gray-900 leading-tight tracking-tighter uppercase">
             {product.name}
           </h3>
           <div className="flex flex-col items-end">
-            <span className="text-base md:text-xl font-black text-pink-500 whitespace-nowrap">
+            <span className="text-base md:text-lg font-black text-pink-500 whitespace-nowrap">
               R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </span>
             <span className="text-[9px] font-bold text-gray-300 uppercase tracking-tighter">Reserva</span>
           </div>
         </div>
-        <p className="text-xs md:text-base text-gray-700 mb-8 line-clamp-2 leading-relaxed font-medium">
+        <p className="text-xs md:text-sm text-gray-700 mb-8 leading-relaxed font-medium">
           {product.description}
         </p>
 
