@@ -15,8 +15,6 @@ export const getImageUrl = (imagePath: string | undefined): string => {
     return imagePath;
   }
   
-  // Em Vite/Vercel, arquivos na pasta public são servidos da raiz
-  // Garantimos que o caminho comece com / e não tenha barras duplas
-  const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-  return cleanPath;
+  // Caminho absoluto para arquivos na pasta public
+  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
 };
