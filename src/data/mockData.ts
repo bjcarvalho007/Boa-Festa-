@@ -32,7 +32,7 @@ export const PRODUCTS: Product[] = [
     description: 'Decoração completa do Stitch em tons de azul e rosa. Aproveite a promoção! (Não trabalhamos com arco de balões)',
     price: 80.00,
     category: 'Promoção',
-    image: 'combo-stitch.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1h7byiatxQEVuCXom79JS0gowJuUuZ_qa',
   },
   {
     id: '17',
@@ -40,7 +40,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit encantado com painel e cilindros personalizados. Valor promocional para reserva rápida! (Não trabalhamos com arco de balões)',
     price: 80.00,
     category: 'Promoção',
-    image: 'combo-reino-magico.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1_TaOZJIMGdPI9qMxKsodrNbWv0eNfF8E',
   },
   {
     id: '13',
@@ -48,7 +48,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit sem o Painel! Somente 3 Cilindros com capas personalizadas em tons de rosa e boleiras combinando.',
     price: 60.00,
     category: 'Cilindros & Boleiras',
-    image: 'cilindros-floral-rosa.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1UpA8onOReGqRZAMqKYvhnYBOhiWXgWk_',
   },
   {
     id: '14',
