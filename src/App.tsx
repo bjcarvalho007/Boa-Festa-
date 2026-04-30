@@ -189,12 +189,16 @@ export default function App() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl hidden xl:block">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm">10+</div>
+              <div className="absolute -bottom-2 md:-bottom-4 -left-2 md:-left-4 bg-white p-3 md:p-4 rounded-xl md:rounded-2xl shadow-2xl z-20">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-pink-500 rounded-lg md:rounded-xl flex items-center justify-center text-white">
+                    <Sparkles size={16} className="animate-pulse" />
+                  </div>
                   <div>
-                    <p className="font-bold text-[10px] uppercase">Anos de Festa</p>
-                    <p className="text-[9px] text-gray-400">Tradição em realizar sonhos</p>
+                    <p className="font-black text-[9px] md:text-xs text-gray-900 leading-tight uppercase tracking-tight">
+                      Para todas <br /> as idades
+                    </p>
+                    <p className="text-[7px] md:text-[9px] text-pink-500 font-bold uppercase tracking-wider mt-0.5">Sonhos sem limites</p>
                   </div>
                 </div>
               </div>
