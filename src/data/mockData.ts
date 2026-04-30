@@ -104,7 +104,7 @@ export const PRODUCTS: Product[] = [
     description: 'Painel moderno com mensagem de Gratidão em fundo galáxia e arranjos azuis.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-gratidao.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1dx84I1MzFr-H9zxzI2tjZgybLCM8aBdE',
   },
   {
     id: '7',
@@ -112,7 +112,7 @@ export const PRODUCTS: Product[] = [
     description: 'Celebração sofisticada com painel Happy Birthday, suportes dourados e bolo fake.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-bday-gold.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1BrppfIPITi-hXsVHafdmrwVWhua3oUgg',
   },
   {
     id: '8',
@@ -120,7 +120,7 @@ export const PRODUCTS: Product[] = [
     description: 'Clima de festa tropical with painel pôr do sol e acessórios em cores vibrantes.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-tardezinha.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1kPyqJzSiTFzMPfNr9TpuX60pmUkB24xe',
   },
   {
     id: '9',
