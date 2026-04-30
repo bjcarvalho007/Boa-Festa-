@@ -25,9 +25,9 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
 
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
       className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-50/50 flex flex-col h-full"
       id={`product-${product.id}`}
     >
@@ -38,8 +38,8 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
         <img
           src={getImageUrl(product.image)}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-110"
-          referrerPolicy="no-referrer"
+          className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700 ease-out group-hover/img:scale-110"
+          loading="lazy"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             if (target.src.includes('regenerated_image')) {

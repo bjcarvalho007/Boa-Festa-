@@ -93,7 +93,6 @@ export default function Cart({ isOpen, onClose, items, onRemove, onUpdateQuantit
                         src={getImageUrl(item.image)}
                         alt={item.name}
                         className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
                       />
                     </div>
                     <div className="flex-1 flex flex-col justify-between py-1">

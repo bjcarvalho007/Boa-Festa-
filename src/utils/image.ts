@@ -6,13 +6,17 @@
 export const getImageUrl = (imagePath: string | undefined): string => {
   if (!imagePath) return '';
   
-  if (imagePath.startsWith('http') || imagePath.startsWith('data:')) {
+  if (
+    imagePath.startsWith('http') || 
+    imagePath.startsWith('https') || 
+    imagePath.startsWith('data:') || 
+    imagePath.startsWith('blob:')
+  ) {
     return imagePath;
   }
   
-  const base = import.meta.env.BASE_URL || '/';
-  const cleanBase = base.endsWith('/') ? base : `${base}/`;
-  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-  
-  return `${cleanBase}${cleanPath}`;
+  // Em Vite/Vercel, arquivos na pasta public são servidos da raiz
+  // Garantimos que o caminho comece com / e não tenha barras duplas
+  const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  return cleanPath;
 };

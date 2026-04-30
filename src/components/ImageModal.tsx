@@ -45,7 +45,6 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt }: Imag
                 src={imageSrc}
                 alt={imageAlt}
                 className="max-w-full max-h-[82vh] object-contain block select-none px-4 md:px-0"
-                referrerPolicy="no-referrer"
               />
             </div>
             
