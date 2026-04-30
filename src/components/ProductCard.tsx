@@ -32,13 +32,13 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
       id={`product-${product.id}`}
     >
       <div 
-        className="relative aspect-[1/1.1] overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer group/img"
+        className="relative aspect-[1/1.1] overflow-hidden bg-white flex items-center justify-center cursor-pointer group/img"
         onClick={() => onImageClick?.(getImageUrl(product.image), product.name)}
       >
         <img
           src={getImageUrl(product.image)}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-[1200ms] cubic-bezier(0.4, 0, 0.2, 1) group-hover/img:scale-110"
+          className="w-full h-full object-contain transition-all duration-[1200ms] group-hover/img:scale-105 p-3"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             if (!target.src.includes('unsplash')) {
@@ -51,9 +51,10 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="bg-white/95 backdrop-blur-md px-6 py-2.5 rounded-full text-pink-500 shadow-2xl border border-pink-100"
+              className="bg-white/95 backdrop-blur-md px-6 py-2.5 rounded-full text-pink-500 shadow-2xl border border-pink-100 flex items-center gap-2"
             >
-              <span className="text-[10px] font-black uppercase tracking-[0.2em]">Ver Detalhes</span>
+              <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-pulse" />
+              <span className="text-[10px] font-black uppercase tracking-[0.2em]">Ver Foto</span>
             </motion.div>
         </div>
         <div className="absolute top-4 left-4 z-10">

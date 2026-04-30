@@ -158,7 +158,9 @@ export default function App() {
                 </span>
               </div>
 
-              <div className="w-full h-full relative overflow-hidden rounded-[2rem] md:rounded-[4rem] shadow-3xl mt-4 sm:mt-0">
+              <div 
+                className="w-full h-full relative overflow-hidden rounded-[2rem] md:rounded-[4rem] shadow-3xl mt-4 sm:mt-0 bg-white"
+              >
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={currentHeroImage}
@@ -168,12 +170,12 @@ export default function App() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 1.2, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    className="absolute inset-0 w-full h-full object-contain grayscale-[20%] hover:grayscale-0 transition-all duration-700 p-2"
                     referrerPolicy="no-referrer"
                   />
                 </AnimatePresence>
 
-                {/* Carousel Indicators - Only showing a limited number of dots if there are many images */}
+                {/* Carousel Indicators */}
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20 overflow-hidden px-2 py-1">
                   {heroCarouselImages.slice(0, 10).map((_, idx) => (
                     <button

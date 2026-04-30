@@ -154,6 +154,22 @@ export const PRODUCTS: Product[] = [
     category: 'Festa',
     image: 'https://lh3.googleusercontent.com/d/1NGbvPG9gf_r8uY_5JEB9Duz3ChDKJ0r4',
   },
+  {
+    id: '18',
+    name: 'Kit Homem Aranha',
+    description: 'Ação e aventura para sua festa! Kit completo do herói com painel e acessórios temáticos.',
+    price: 40.00,
+    category: 'Festa',
+    image: 'https://lh3.googleusercontent.com/d/1Ohh3mI-YcCzhIdpEHVLBBSQDNi5N5-an',
+  },
+  {
+    id: '19',
+    name: 'Kit Pequena Sereia',
+    description: 'Magia sob o mar! Decoração encantadora com tons de sereia e painel maravilhoso.',
+    price: 40.00,
+    category: 'Festa',
+    image: 'https://lh3.googleusercontent.com/d/1aPa6qprKAHjnt7gwcT7wgC8TT8nla90j',
+  },
 ];
 
 export const REVIEWS: Review[] = [
