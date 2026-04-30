@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
 import ProductCard from './components/ProductCard';
@@ -12,7 +12,7 @@ import Testimonials from './components/Testimonials';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import ReviewForm from './components/ReviewForm';
 import ImageModal from './components/ImageModal';
-import { PRODUCTS, REVIEWS, CATEGORIES } from './data/mockData';
+import { PRODUCTS, REVIEWS, CATEGORIES, TESTIMONIAL_IMAGES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
 import { getImageUrl } from './utils/image';
 import { ArrowRight, Sparkles, Instagram, Mail, MapPin } from 'lucide-react';
@@ -26,6 +26,21 @@ export default function App() {
   const [reviews, setReviews] = useState<Review[]>(REVIEWS);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState<{ src: string; alt: string } | null>(null);
+  
+  // Combine custom testimonial images with product images for the hero carousel
+  const heroCarouselImages = useMemo(() => {
+    const productImages = PRODUCTS.map(p => getImageUrl(p.image));
+    return [...productImages, ...TESTIMONIAL_IMAGES];
+  }, []);
+
+  const [currentHeroImage, setCurrentHeroImage] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroImage((prev) => (prev + 1) % heroCarouselImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [heroCarouselImages.length]);
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
@@ -130,15 +145,53 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative aspect-[4/3] sm:aspect-square lg:aspect-auto h-full min-h-[250px] sm:min-h-[400px] md:min-h-[450px] px-6 sm:px-0"
+              className="relative aspect-[4/3] sm:aspect-square lg:aspect-auto h-full min-h-[300px] sm:min-h-[400px] md:min-h-[450px] px-6 sm:px-0"
             >
               <div className="absolute inset-6 sm:inset-0 bg-pink-100/50 rounded-[2rem] md:rounded-[4rem] rotate-3 -z-10" />
-              <img
-                src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?auto=format&fit=crop&w=1200&q=80"
-                alt="Decoração Boa Festa"
-                className="w-full h-full object-cover rounded-[2rem] md:rounded-[4rem] shadow-3xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-                referrerPolicy="no-referrer"
-              />
+              
+              {/* Título acima da imagem */}
+              <div className="absolute -top-12 left-0 w-full text-center sm:text-left mb-6 z-20">
+                <span className="bg-pink-500 text-white px-6 py-2.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] shadow-xl shadow-pink-200/50 flex items-center justify-center sm:justify-start w-fit mx-auto sm:mx-0 gap-2">
+                  <Sparkles className="w-3 h-3 text-pink-100" />
+                  Nossas Lindas Festas
+                </span>
+              </div>
+
+              <div className="w-full h-full relative overflow-hidden rounded-[2rem] md:rounded-[4rem] shadow-3xl mt-4 sm:mt-0">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentHeroImage}
+                    src={heroCarouselImages[currentHeroImage]}
+                    alt={`Decoração ${currentHeroImage + 1}`}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                </AnimatePresence>
+
+                {/* Carousel Indicators - Only showing a limited number of dots if there are many images */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20 overflow-hidden px-2 py-1">
+                  {heroCarouselImages.slice(0, 10).map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentHeroImage(idx)}
+                      className={`h-1.5 transition-all duration-300 rounded-full ${
+                        currentHeroImage % 10 === idx ? 'w-8 bg-white' : 'w-2 bg-white/40'
+                      }`}
+                    />
+                  ))}
+                </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-10 left-8 right-8 text-white z-10 hidden md:block">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-1 opacity-80">Inspiração</p>
+                  <p className="text-lg font-display font-bold uppercase tracking-tight">Fotos de Clientes Reais</p>
+                </div>
+              </div>
+
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl hidden xl:block">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm">10+</div>
