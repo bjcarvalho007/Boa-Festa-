@@ -192,7 +192,7 @@ export default function App() {
                   key={product.id}
                   product={product}
                   onAddToCart={handleAddToCart}
-                  onImageClick={(src, alt) => setPreviewImage({ src, alt })}
+                  onImageClick={(src, alt) => setPreviewImage({ src: getImageUrl(src), alt })}
                 />
               ))}
             </AnimatePresence>
