@@ -95,6 +95,7 @@ export default function Cart({ isOpen, onClose, items, onRemove, onUpdateQuantit
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
+                            console.error(`ERRO DE IMAGEM (CARRINHO): Falha ao carregar "${item.image}" em "${target.src}".`);
                             if (!target.src.includes('unsplash')) {
                               target.src = 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=200&auto=format&fit=crop';
                             }
