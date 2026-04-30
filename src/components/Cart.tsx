@@ -89,11 +89,17 @@ export default function Cart({ isOpen, onClose, items, onRemove, onUpdateQuantit
                 items.map((item) => (
                   <div key={item.id} className="flex min-h-[100px] gap-4 group border-b border-gray-50 pb-6 last:border-0 last:pb-0">
                     <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-50 rounded-2xl overflow-hidden flex-shrink-0 border border-gray-100">
-                      <img
-                        src={getImageUrl(item.image)}
-                        alt={item.name}
-                        className="w-full h-full object-cover"
-                      />
+                        <img
+                          src={getImageUrl(item.image)}
+                          alt={item.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            if (!target.src.includes('unsplash')) {
+                              target.src = 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=200&auto=format&fit=crop';
+                            }
+                          }}
+                        />
                     </div>
                     <div className="flex-1 flex flex-col justify-between py-1">
                       <div>

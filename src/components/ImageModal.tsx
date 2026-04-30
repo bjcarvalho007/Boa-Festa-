@@ -45,6 +45,12 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt }: Imag
                 src={imageSrc}
                 alt={imageAlt}
                 className="max-w-full max-h-[82vh] object-contain block select-none px-4 md:px-0"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  if (!target.src.includes('unsplash')) {
+                    target.src = 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop';
+                  }
+                }}
               />
             </div>
             

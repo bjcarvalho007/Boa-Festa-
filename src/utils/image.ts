@@ -6,27 +6,12 @@
 export const getImageUrl = (imagePath: string | undefined): string => {
   if (!imagePath) return '';
   
-  if (
-    imagePath.startsWith('http') || 
-    imagePath.startsWith('https') || 
-    imagePath.startsWith('data:') || 
-    imagePath.startsWith('blob:')
-  ) {
-    return imagePath;
-  }
-
-  // No Vite, a BASE_URL deve ser respeitada
-  const base = import.meta.env.BASE_URL || '/';
-  
-  // Se o caminho já começar com a base (e não for apenas /), retornamos ele (idempotência)
-  if (base !== '/' && imagePath.startsWith(base)) {
+  if (/^(http|https|data|blob):/.test(imagePath)) {
     return imagePath;
   }
   
-  // Garante que a base termine com /
-  const cleanBase = base.endsWith('/') ? base : `${base}/`;
-  // Garante que o path NÃO comece com / para evitar barras duplas
-  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-  
-  return `${cleanBase}${cleanPath}`;
+  // Para arquivos na pasta public em Vite com base: './'
+  // Retornamos o caminho sem a barra inicial para que seja relativo à URL atual
+  // Isso funciona bem se o app for uma SPA de rota única ou se as rotas forem controladas por hash
+  return imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
 };

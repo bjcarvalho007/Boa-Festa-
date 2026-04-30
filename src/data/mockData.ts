@@ -14,8 +14,9 @@ export const CATEGORIES = [
 
 export const PRODUCTS: Product[] = [
   // DICA: Para mudar uma imagem manualmente:
-  // 1. Arraste sua foto para a pasta 'public' no menu à esquerda.
-  // 2. Mude o nome no campo 'image' abaixo para o nome exato da foto (ex: 'minha_festa.jpg').
+  // 1. No menu à esquerda, clique em 'public' e suba sua foto (arraste e solte).
+  // 2. Mude o nome no campo 'image' abaixo para o nome EXATO do arquivo com a extensão (ex: 'festa.jpg').
+  // 3. Se preferir, pode colar um link direto da internet (ex: 'https://images.unsplash.com/photo-...')
   {
     id: '15',
     name: 'Combo Promo - Bolofofos',
