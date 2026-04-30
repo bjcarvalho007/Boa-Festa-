@@ -56,7 +56,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit sem o Painel! Inclui Capas para os Cilindros com texturas elegantes e Boleiras douradas de destaque.',
     price: 60.00,
     category: 'Cilindros & Boleiras',
-    image: 'cilindros-luxo-dourado.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1oE8bNv2aHBcN4M43sCsjxyY9KgrHAf9A',
   },
   {
     id: '1',
@@ -64,7 +64,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit delicado com painel decorativo "Boy or Girl", pelúcia de urso e suportes dourados.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-cha-revelacao.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1yt3Va2d5t4P7St8LYILTs1vtygRGgmXX',
   },
   {
     id: '2',
@@ -72,7 +72,7 @@ export const PRODUCTS: Product[] = [
     description: 'Celebre com as cores do Mengão! Painel sublimado e acessórios pretos de alta qualidade.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-flamengo.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1gtF9Md6_D4Y3XHokDNp7TjKAjQWnu0rs',
   },
   {
     id: '3',
@@ -80,7 +80,7 @@ export const PRODUCTS: Product[] = [
     description: 'Para o torcedor fiel! Painel do Timão with suportes brancos e pretos elegantes.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-corinthians.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1llSIwZoktIWKHIGk7M46pnNG_nCnGkN-',
   },
   {
     id: '4',
@@ -88,7 +88,7 @@ export const PRODUCTS: Product[] = [
     description: 'Painel vibrante de estádio com suportes temáticos para os amantes do esporte.',
     price: 40.00,
     category: 'Festa',
-    image: 'kit-futebol.jpg',
+    image: 'https://lh3.googleusercontent.com/d/1fTZ6VlOT_XCQbbbgpPAs3DU70Jk0bfc9',
   },
   {
     id: '5',
