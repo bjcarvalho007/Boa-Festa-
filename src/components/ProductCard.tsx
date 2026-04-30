@@ -28,59 +28,60 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-50/50 flex flex-col h-full"
+      className="group bg-white rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-[0_20px_50px_-20px_rgba(255,20,147,0.15)] flex flex-col h-full"
       id={`product-${product.id}`}
     >
       <div 
-        className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer group/img"
+        className="relative aspect-[1/1.1] overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer group/img"
         onClick={() => onImageClick?.(getImageUrl(product.image), product.name)}
       >
         <img
           src={getImageUrl(product.image)}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-110"
+          className="w-full h-full object-cover transition-transform duration-[1200ms] cubic-bezier(0.4, 0, 0.2, 1) group-hover/img:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            console.error(`ERRO DE IMAGEM: Falha ao carregar "${product.image}" em "${target.src}". Verifique se o arquivo está na pasta 'public'.`);
             if (!target.src.includes('unsplash')) {
-              target.src = 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=500&auto=format&fit=crop';
+              console.log(`Fallback for ${product.image}`);
+              target.src = 'https://images.unsplash.com/photo-1530103043960-ef38714abb15?q=80&w=600&auto=format&fit=crop';
             }
           }}
         />
-        <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-700 flex items-end justify-center pb-8">
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileHover={{ opacity: 1, scale: 1 }}
-              className="bg-white/80 backdrop-blur-md p-3 rounded-full text-pink-500 shadow-xl opacity-0 group-hover/img:opacity-100 transition-all"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="bg-white/95 backdrop-blur-md px-6 py-2.5 rounded-full text-pink-500 shadow-2xl border border-pink-100"
             >
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-black uppercase tracking-widest px-2">Ver Foto</span>
-              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em]">Ver Detalhes</span>
             </motion.div>
         </div>
-        <div className="absolute top-3 left-3 md:top-4 md:left-4 z-10">
-          <span className="bg-white/90 backdrop-blur-md text-pink-500 border border-pink-100 px-3 py-1 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest shadow-sm">
+        <div className="absolute top-4 left-4 z-10">
+          <span className="bg-white/90 backdrop-blur-md text-pink-600 border border-pink-100 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] shadow-sm">
             {product.category}
           </span>
         </div>
       </div>
 
-      <div className="p-5 md:p-8 flex flex-col flex-1">
-        <div className="flex justify-between items-start mb-2 gap-2 md:gap-4">
-          <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
+      <div className="p-6 md:p-10 flex flex-col flex-1">
+        <div className="flex justify-between items-start mb-3 gap-4">
+          <h3 className="text-base md:text-xl font-display font-bold text-gray-900 leading-tight tracking-tight uppercase">
             {product.name}
           </h3>
-          <span className="text-sm md:text-lg font-black text-gray-900 whitespace-nowrap">
-            R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-          </span>
+          <div className="flex flex-col items-end">
+            <span className="text-base md:text-xl font-black text-pink-500 whitespace-nowrap">
+              R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+            </span>
+            <span className="text-[9px] font-bold text-gray-300 uppercase tracking-tighter">Reserva</span>
+          </div>
         </div>
-        <p className="text-[10px] md:text-sm text-gray-500 mb-6 line-clamp-2">
+        <p className="text-[11px] md:text-sm text-gray-400 mb-8 line-clamp-2 leading-relaxed font-light">
           {product.description}
         </p>
 
-        <div className="mt-auto space-y-3 md:space-y-4">
-          <div className="flex items-center justify-between bg-gray-50 rounded-xl p-1.5 md:p-2">
-            <span className="text-[8px] md:text-xs font-bold text-gray-400 uppercase ml-2">Quantidade</span>
+        <div className="mt-auto space-y-4">
+          <div className="flex items-center justify-between bg-gray-50/80 rounded-2xl p-2 border border-gray-100/50">
+            <span className="text-[9px] font-black text-gray-400 uppercase ml-3 tracking-widest">Qtd</span>
             <div className="flex items-center gap-2 md:gap-3">
               <button
                 onClick={() => adjustQuantity(-1)}
