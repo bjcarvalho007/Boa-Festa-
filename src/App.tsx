@@ -27,10 +27,11 @@ export default function App() {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState<{ src: string; alt: string } | null>(null);
   
-  // Combine custom testimonial images with product images for the hero carousel
+  // Use only images from the actual product database, shuffled for variety
   const heroCarouselImages = useMemo(() => {
     const productImages = PRODUCTS.map(p => getImageUrl(p.image));
-    return [...productImages, ...TESTIMONIAL_IMAGES];
+    // Simple shuffle algorithm
+    return [...productImages].sort(() => Math.random() - 0.5);
   }, []);
 
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
