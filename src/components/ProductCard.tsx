@@ -40,11 +40,11 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-110"
           onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            // Evita loop infinito se o placeholder também falhar
-            if (!target.src.includes('unsplash')) {
-              target.src = 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=500&auto=format&fit=crop';
-              console.warn(`Imagem não encontrada: ${product.image}. Usando placeholder.`);
+            const target = e.target as HTMLElement;
+            const src = (target as HTMLImageElement).src;
+            console.error(`Failed to load image: ${src}`);
+            if (!src.includes('unsplash')) {
+              (target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=500&auto=format&fit=crop';
             }
           }}
         />
