@@ -22,4 +22,6 @@ export interface Review {
   text: string;
   rating: number;
   date: string;
+  avatar?: string;
+  location?: string;
 }
