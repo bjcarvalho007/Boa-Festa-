@@ -20,14 +20,16 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
   return (
     <header className="sticky top-0 z-50 w-full font-sans">
       <nav className="bg-white/95 backdrop-blur-xl border-b border-gray-100 py-5 px-6 md:px-12 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-4 flex-1">
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-95"
-          >
-            <Menu size={22} />
-          </button>
-          
+        {/* Lado Esquerdo: Logo */}
+        <div className="flex flex-col items-start flex-1">
+          <span className="text-base sm:text-2xl md:text-3xl font-display font-black tracking-tighter text-gray-900 cursor-pointer uppercase leading-none">
+            BOA FESTA
+          </span>
+          <span className="text-[6px] md:text-[10px] font-black tracking-[0.4em] text-pink-500 uppercase mt-0.5 md:mt-2">Pegue & Monte</span>
+        </div>
+
+        {/* Centro: Links Desktop e Busca */}
+        <div className="flex items-center gap-4 md:gap-8 flex-1 justify-end lg:justify-center">
           <div className="hidden lg:flex items-center gap-8">
             <a href="#catalogo" className="text-xs font-bold uppercase tracking-widest hover:text-pink-500 transition-colors">Temas</a>
             <a href="#como-funciona" className="text-xs font-bold uppercase tracking-widest hover:text-pink-500 transition-colors">Como Funciona</a>
@@ -35,56 +37,29 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
           </div>
         </div>
 
-        <div className="flex flex-col items-center flex-1">
-          <span className="text-base sm:text-2xl md:text-3xl font-display font-black tracking-tighter text-gray-900 cursor-pointer uppercase leading-none text-center">
-            BOA FESTA
-          </span>
-          <span className="text-[6px] md:text-[10px] font-black tracking-[0.4em] text-pink-500 uppercase mt-0.5 md:mt-2 text-center">Pegue & Monte</span>
-        </div>
+        {/* Lado Direito: Ações e Botão Menu Mobile */}
+        <div className="flex items-center gap-2 md:gap-4 flex-1 justify-end">
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            onClick={onCartClick}
+            className="relative p-3 bg-gray-900 text-white rounded-full hover:bg-black transition-all shadow-xl shadow-gray-200"
+            id="cart-button"
+          >
+            <ShoppingCart size={20} />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white animate-bounce">
+                {cartCount}
+              </span>
+            )}
+          </motion.button>
 
-        <div className="flex items-center gap-2 md:gap-6 flex-1 justify-end">
-          {/* Desktop Search */}
-          <div className="hidden md:flex items-center bg-gray-50 rounded-full px-5 py-2.5 border border-gray-100 focus-within:border-pink-200 transition-all">
-            <Search className="text-gray-400" size={16} />
-            <input
-              type="text"
-              placeholder="Buscar tema..."
-              className="bg-transparent border-none text-xs ml-3 outline-none w-32 lg:w-48"
-              onChange={(e) => onSearch(e.target.value)}
-            />
-          </div>
-
-          <div className="flex items-center gap-2 md:gap-4">
-            <button
-              className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
-              onClick={() => {
-                const query = prompt('Buscar tema:');
-                if (query !== null) onSearch(query);
-              }}
-              aria-label="Buscar"
-            >
-              <Search size={20} />
-            </button>
-            <a 
-              href="#catalogo" 
-              className="hidden sm:flex items-center gap-2 bg-pink-500 text-white px-5 md:px-6 py-2.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-pink-600 transition-all shadow-lg shadow-pink-200"
-            >
-              Catálogo
-            </a>
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={onCartClick}
-              className="relative p-3 bg-gray-900 text-white rounded-full hover:bg-black transition-all shadow-xl shadow-gray-200"
-              id="cart-button"
-            >
-              <ShoppingCart size={20} />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white animate-bounce">
-                  {cartCount}
-                </span>
-              )}
-            </motion.button>
-          </div>
+          {/* Botão do Menu Mobile agora no lado direito */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden p-3 bg-pink-50 text-pink-600 rounded-full hover:bg-pink-100 transition-colors active:scale-95"
+          >
+            <Menu size={20} />
+          </button>
         </div>
       </nav>
 
@@ -100,11 +75,11 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] lg:hidden"
             />
             <motion.div
-              initial={{ x: '-100%' }}
+              initial={{ x: '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '-100%' }}
+              exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 h-full w-4/5 max-w-sm bg-white z-[60] p-8 lg:hidden shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white z-[60] p-8 lg:hidden shadow-2xl flex flex-col"
             >
               <div className="flex justify-between items-center mb-12">
                 <span className="text-2xl font-serif font-black italic uppercase">MENU</span>

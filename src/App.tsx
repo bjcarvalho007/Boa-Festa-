@@ -97,12 +97,12 @@ export default function App() {
         <section className="relative min-h-[600px] lg:min-h-[85vh] flex items-center overflow-hidden bg-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(244,114,182,0.08),transparent_50%)]" />
           
-          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 lg:gap-16 items-center px-4 sm:px-6 md:px-12 relative z-10 py-8 md:py-16 lg:py-24">
+          <div className="max-w-7xl mx-auto w-full flex flex-col items-center gap-12 lg:gap-20 px-4 sm:px-6 md:px-12 relative z-10 py-8 md:py-16 lg:py-24">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center lg:text-left pt-2 lg:pt-0"
+              className="text-center pt-2 max-w-4xl"
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-pink-50 rounded-full text-[9px] md:text-xs font-bold text-pink-600 mb-4 lg:mb-8 uppercase tracking-[0.2em]">
                 <Sparkles size={12} />
@@ -113,15 +113,15 @@ export default function App() {
                 Dos Seus <br className="hidden sm:block" />
                 <span className="text-pink-500">Sonhos</span>
               </h1>
-              <div className="flex items-center justify-center lg:justify-start gap-2 mb-6 lg:mb-10 text-gray-400">
+              <div className="flex items-center justify-center gap-2 mb-6 lg:mb-10 text-gray-400">
                 <MapPin size={14} className="text-pink-400" />
                 <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Araguaína - TO</span>
               </div>
-              <p className="text-sm md:text-lg text-gray-500 mb-6 lg:mb-12 max-w-sm sm:max-w-md mx-auto lg:mx-0 leading-relaxed font-light px-8 sm:px-0">
+              <p className="text-sm md:text-lg text-gray-500 mb-6 lg:mb-12 max-w-sm sm:max-w-2xl mx-auto leading-relaxed font-light px-4 sm:px-0">
                 Kits decorativos <span className="text-black font-semibold">Pegue & Monte</span>. A solução prática, econômica e elegante para transformar qualquer ambiente.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4 px-8 sm:px-0 mb-8">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 px-4 sm:px-0 mb-8">
                 <motion.a
                   href="#catalogo"
                   whileHover={{ scale: 1.02 }}
@@ -146,13 +146,13 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative aspect-[4/3] sm:aspect-square lg:aspect-auto h-full min-h-[300px] sm:min-h-[400px] md:min-h-[450px] px-6 sm:px-0"
+              className="relative aspect-[4/3] sm:aspect-square w-full max-w-3xl mx-auto min-h-[300px] sm:min-h-[400px] md:min-h-[500px] px-4 sm:px-0"
             >
               <div className="absolute inset-6 sm:inset-0 bg-pink-100/50 rounded-[2rem] md:rounded-[4rem] rotate-3 -z-10" />
               
               {/* Título acima da imagem */}
-              <div className="absolute -top-12 left-0 w-full text-center sm:text-left mb-6 z-20">
-                <span className="bg-pink-500 text-white px-6 py-2.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] shadow-xl shadow-pink-200/50 flex items-center justify-center sm:justify-start w-fit mx-auto sm:mx-0 gap-2">
+              <div className="absolute -top-12 left-0 w-full text-center mb-6 z-20">
+                <span className="bg-pink-500 text-white px-6 py-2.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] shadow-xl shadow-pink-200/50 flex items-center justify-center w-fit mx-auto gap-2">
                   <Sparkles className="w-3 h-3 text-pink-100" />
                   Nossas Lindas Festas
                 </span>
@@ -187,10 +187,6 @@ export default function App() {
                 </div>
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-10 left-8 right-8 text-white z-10 hidden md:block">
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-1 opacity-80">Inspiração</p>
-                  <p className="text-lg font-display font-bold uppercase tracking-tight">Fotos de Clientes Reais</p>
-                </div>
               </div>
 
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl hidden xl:block">
@@ -298,42 +294,44 @@ export default function App() {
       </main>
 
       <footer id="contato" className="bg-white py-20 md:py-24 px-6 md:px-12 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-start">
-          <div className="flex flex-col items-center md:items-start justify-center">
+        <div className="max-w-7xl mx-auto flex flex-col items-center gap-12 md:gap-16">
+          {/* Redes Sociais Centralizadas */}
+          <div className="flex flex-col items-center justify-center text-center">
             <h4 className="text-xs font-black tracking-[0.3em] uppercase text-gray-500 mb-8">Nossas Redes</h4>
-            <div className="flex gap-4 md:gap-6">
+            <div className="flex gap-4 md:gap-8">
               <a 
                 href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-pink-500 hover:bg-pink-50 transition-all duration-300 border border-gray-100 shadow-sm hover:shadow-pink-100"
+                className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-pink-500 hover:bg-pink-50 transition-all duration-300 border border-gray-100 shadow-sm hover:shadow-pink-100 group"
               >
-                <Instagram size={24} />
+                <Instagram size={24} className="group-hover:scale-110 transition-transform" />
               </a>
               <a 
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-all duration-300 border border-gray-100 shadow-sm"
+                className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-all duration-300 border border-gray-100 shadow-sm group"
               >
-                <Mail size={24} />
+                <Mail size={24} className="group-hover:scale-110 transition-transform" />
               </a>
             </div>
           </div>
 
-          <div className="flex flex-col items-center md:items-end md:text-right">
-            <p className="text-[11px] text-gray-500 font-bold uppercase tracking-[0.3em]">© 2024 BOA FESTA - TODOS OS DIREITOS RESERVADOS</p>
+          {/* Direitos Reservados e Desenvolvimento Centralizados */}
+          <div className="flex flex-col items-center text-center w-full max-w-2xl">
+            <p className="text-[11px] text-gray-500 font-bold uppercase tracking-[0.3em] mb-10">© 2024 BOA FESTA - TODOS OS DIREITOS RESERVADOS</p>
             
-            <div className="mt-8 pt-8 border-t border-gray-50 flex flex-col items-center md:items-end group">
-              <p className="text-[10px] text-gray-600 uppercase tracking-[0.2em] mb-3">
+            <div className="pt-10 border-t border-gray-50 flex flex-col items-center group w-full">
+              <p className="text-[10px] text-gray-600 uppercase tracking-[0.2em] mb-4">
                 Desenvolvido por: <span className="font-black text-gray-900">B.J.C</span>
               </p>
               <a 
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vi o site da Boa Festa e gostaria de saber mais sobre a criação de sites.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-900 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.1em] shadow-lg shadow-gray-200 hover:bg-pink-500 hover:shadow-pink-100 transition-all duration-300 flex items-center gap-2"
+                className="bg-gray-900 text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.1em] shadow-lg shadow-gray-200 hover:bg-pink-500 hover:shadow-pink-100 transition-all duration-300 flex items-center gap-3"
               >
                 Solicite o seu site personalizado aqui
-                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
           </div>
