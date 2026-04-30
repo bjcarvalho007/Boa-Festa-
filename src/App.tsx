@@ -15,8 +15,8 @@ import ImageModal from './components/ImageModal';
 import { PRODUCTS, REVIEWS, CATEGORIES, TESTIMONIAL_IMAGES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
 import { getImageUrl } from './utils/image';
-import { ArrowRight, Sparkles, Instagram, Mail, MapPin } from 'lucide-react';
-import { CONTACT_EMAIL } from './constants';
+import { ArrowRight, Sparkles, Instagram, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { CONTACT_EMAIL, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from './constants';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -298,19 +298,9 @@ export default function App() {
       </main>
 
       <footer id="contato" className="bg-white py-20 md:py-24 px-6 md:px-12 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <span className="text-3xl md:text-4xl font-display font-black text-gray-900 tracking-tighter uppercase leading-none">BOA FESTA</span>
-            <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] text-pink-500 uppercase mt-2">Pegue & Monte</span>
-            <div className="mt-6 flex items-center gap-2 text-gray-400">
-              <MapPin size={14} className="text-pink-400" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Araguaína - TO</span>
-            </div>
-            <p className="mt-4 text-sm md:text-base text-gray-400 max-w-xs leading-relaxed font-light">Soluções criativas e elegantes para tornar sua festa inesquecível. Praticidade que encanta.</p>
-          </div>
-
-          <div className="flex flex-col items-center justify-center">
-            <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-300 mb-8">Nossas Redes</h4>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-start">
+          <div className="flex flex-col items-center md:items-start justify-center">
+            <h4 className="text-xs font-black tracking-[0.3em] uppercase text-gray-500 mb-8">Nossas Redes</h4>
             <div className="flex gap-4 md:gap-6">
               <a 
                 href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" 
@@ -330,10 +320,22 @@ export default function App() {
           </div>
 
           <div className="flex flex-col items-center md:items-end md:text-right">
-            <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-300 mb-8">Desenvolvimento</h4>
-            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">PROJETO BY</p>
-            <p className="text-xl font-black tracking-tighter text-gray-900">B.J.C</p>
-            <p className="mt-8 text-[10px] text-gray-300 font-medium uppercase tracking-[0.2em]">© 2024 TODOS OS DIREITOS RESERVADOS</p>
+            <p className="text-[11px] text-gray-500 font-bold uppercase tracking-[0.3em]">© 2024 BOA FESTA - TODOS OS DIREITOS RESERVADOS</p>
+            
+            <div className="mt-8 pt-8 border-t border-gray-50 flex flex-col items-center md:items-end group">
+              <p className="text-[10px] text-gray-600 uppercase tracking-[0.2em] mb-3">
+                Desenvolvido por: <span className="font-black text-gray-900">B.J.C</span>
+              </p>
+              <a 
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vi o site da Boa Festa e gostaria de saber mais sobre a criação de sites.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-900 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.1em] shadow-lg shadow-gray-200 hover:bg-pink-500 hover:shadow-pink-100 transition-all duration-300 flex items-center gap-2"
+              >
+                Solicite o seu site personalizado aqui
+                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
           </div>
         </div>
       </footer>
