@@ -10,9 +10,8 @@ export const getImageUrl = (imagePath: string | undefined): string => {
     return imagePath;
   }
   
-  // Para arquivos na pasta public em Vite, usando base relativa ('')
-  // Garantimos que o caminho NÃO comece com / para que seja relativo à URL atual.
-  // Isso resolve problemas de roteamento em ambientes de preview.
-  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-  return cleanPath;
+  // No Vite, arquivos na pasta public são servidos da raiz /
+  // Garantimos que o caminho seja absoluto (começando com /) e sem barras duplas.
+  const path = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  return path.replace(/\/+/g, '/');
 };
