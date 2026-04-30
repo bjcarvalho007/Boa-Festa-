@@ -10,12 +10,8 @@ export const getImageUrl = (imagePath: string | undefined): string => {
     return imagePath;
   }
   
-  // Ensure we don't have double slashes
-  const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
-    ? import.meta.env.BASE_URL 
-    : `${import.meta.env.BASE_URL}/`;
-    
-  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+  // No Vite, arquivos na pasta public devem ser referenciados a partir da raiz '/'
+  const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
   
-  return `${baseUrl}${cleanPath}`;
+  return cleanPath;
 };
