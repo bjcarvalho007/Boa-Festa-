@@ -10,7 +10,7 @@ export const getImageUrl = (imagePath: string | undefined): string => {
     return imagePath;
   }
   
-  const base = import.meta.env.BASE_URL || './';
+  const base = import.meta.env.BASE_URL || '/';
   const cleanBase = base.endsWith('/') ? base : `${base}/`;
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
   

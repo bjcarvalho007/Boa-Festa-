@@ -39,6 +39,7 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
           src={getImageUrl(product.image)}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-110"
+          referrerPolicy="no-referrer"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             if (target.src.includes('regenerated_image')) {
