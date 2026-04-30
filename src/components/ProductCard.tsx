@@ -33,7 +33,7 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
     >
       <div 
         className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer group/img"
-        onClick={() => onImageClick?.(product.image, product.name)}
+        onClick={() => onImageClick?.(getImageUrl(product.image), product.name)}
       >
         <img
           src={getImageUrl(product.image)}

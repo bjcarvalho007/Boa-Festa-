@@ -14,7 +14,19 @@ export const getImageUrl = (imagePath: string | undefined): string => {
   ) {
     return imagePath;
   }
+
+  // No Vite, a BASE_URL deve ser respeitada
+  const base = import.meta.env.BASE_URL || '/';
   
-  // Caminho absoluto para arquivos na pasta public
-  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  // Se o caminho já começar com a base (e não for apenas /), retornamos ele (idempotência)
+  if (base !== '/' && imagePath.startsWith(base)) {
+    return imagePath;
+  }
+  
+  // Garante que a base termine com /
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  // Garante que o path NÃO comece com / para evitar barras duplas
+  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+  
+  return `${cleanBase}${cleanPath}`;
 };

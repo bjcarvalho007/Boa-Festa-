@@ -303,7 +303,7 @@ export default function App() {
       <ImageModal
         isOpen={!!previewImage}
         onClose={() => setPreviewImage(null)}
-        imageSrc={getImageUrl(previewImage?.src)}
+        imageSrc={previewImage?.src || ''}
         imageAlt={previewImage?.alt || ''}
       />
     </div>
