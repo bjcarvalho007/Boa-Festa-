@@ -282,7 +282,7 @@ export default function App() {
               { step: '04', title: 'Celebre', desc: 'Monte do seu jeito e aproveite momentos inesquecíveis!' }
             ].map((item, idx) => (
               <div key={idx} className="relative p-6 md:p-8 bg-gray-50 rounded-[2rem] md:rounded-[2.5rem] border border-gray-100 hover:border-pink-200 transition-colors group">
-                <span className="text-4xl md:text-5xl font-display font-black text-pink-100 absolute top-4 right-6 group-hover:text-pink-200 transition-colors">{item.step}</span>
+                <span className="text-4xl md:text-5xl font-display font-black text-pink-200 absolute top-4 right-6 group-hover:text-pink-400 transition-colors">{item.step}</span>
                 <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-4 relative z-10">{item.title}</h3>
                 <p className="text-gray-500 text-xs md:text-sm leading-relaxed relative z-10">{item.desc}</p>
               </div>
