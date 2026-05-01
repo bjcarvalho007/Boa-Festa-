@@ -10,13 +10,14 @@ import ProductCard from './components/ProductCard';
 import Cart from './components/Cart';
 import Testimonials from './components/Testimonials';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import FloatingCart from './components/FloatingCart';
 import ReviewForm from './components/ReviewForm';
 import ImageModal from './components/ImageModal';
 import { PRODUCTS, REVIEWS, CATEGORIES, TESTIMONIAL_IMAGES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
 import { getImageUrl } from './utils/image';
 import { ArrowRight, Sparkles, Instagram, Mail, MapPin, MessageCircle } from 'lucide-react';
-import { CONTACT_EMAIL, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from './constants';
+import { CONTACT_EMAIL, WHATSAPP_NUMBER, WHATSAPP_DEV_NUMBER, WHATSAPP_MESSAGE } from './constants';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -26,6 +27,8 @@ export default function App() {
   const [reviews, setReviews] = useState<Review[]>(REVIEWS);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState<{ src: string; alt: string } | null>(null);
+
+  const cartCount = useMemo(() => cartItems.reduce((acc, item) => acc + item.quantity, 0), [cartItems]);
   
   // Use only images from the actual product database, shuffled for variety
   const heroCarouselImages = useMemo(() => {
@@ -87,7 +90,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Navbar
-        cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+        cartCount={cartCount}
         onCartClick={() => setIsCartOpen(true)}
         onSearch={setSearchQuery}
       />
@@ -331,7 +334,7 @@ export default function App() {
                 Desenvolvido por: <span className="font-black text-gray-900">B.J.C</span>
               </p>
               <a 
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Vi o site da Boa Festa e gostaria de saber mais sobre a criação de sites.")}`}
+                href={`https://wa.me/${WHATSAPP_DEV_NUMBER}?text=${encodeURIComponent("Olá! Vi o site da Boa Festa e gostaria de saber mais sobre a criação de sites.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-900 text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.1em] shadow-lg shadow-gray-200 hover:bg-pink-500 hover:shadow-pink-100 transition-all duration-300 flex items-center gap-3"
@@ -353,6 +356,7 @@ export default function App() {
       />
 
       <FloatingWhatsApp />
+      <FloatingCart count={cartCount} onClick={() => setIsCartOpen(true)} />
 
       <ReviewForm
         isOpen={isReviewModalOpen}
