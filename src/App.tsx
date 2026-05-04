@@ -31,20 +31,19 @@ export default function App() {
   const cartCount = useMemo(() => cartItems.reduce((acc, item) => acc + item.quantity, 0), [cartItems]);
   
   // Use only images from the actual product database, shuffled for variety
-  const heroCarouselImages = useMemo(() => {
-    const productImages = PRODUCTS.map(p => getImageUrl(p.image));
+  const heroCarouselProducts = useMemo(() => {
     // Simple shuffle algorithm
-    return [...productImages].sort(() => Math.random() - 0.5);
+    return [...PRODUCTS].sort(() => Math.random() - 0.5);
   }, []);
 
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentHeroImage((prev) => (prev + 1) % heroCarouselImages.length);
+      setCurrentHeroImage((prev) => (prev + 1) % heroCarouselProducts.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [heroCarouselImages.length]);
+  }, [heroCarouselProducts.length]);
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
@@ -165,22 +164,40 @@ export default function App() {
                 className="w-full h-full relative overflow-hidden rounded-[2rem] md:rounded-[4rem] shadow-3xl mt-4 sm:mt-0 bg-white"
               >
                 <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentHeroImage}
-                    src={heroCarouselImages[currentHeroImage]}
-                    alt={`Decoração ${currentHeroImage + 1}`}
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 1.2, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full object-contain grayscale-[20%] hover:grayscale-0 transition-all duration-700 p-2"
-                    referrerPolicy="no-referrer"
-                  />
+                  <div key={currentHeroImage} className="absolute inset-0">
+                    <motion.img
+                      src={getImageUrl(heroCarouselProducts[currentHeroImage].image)}
+                      alt={heroCarouselProducts[currentHeroImage].name}
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 1.2, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full object-contain grayscale-[20%] hover:grayscale-0 transition-all duration-700 p-2"
+                      referrerPolicy="no-referrer"
+                    />
+                    
+                    {heroCarouselProducts[currentHeroImage].category === 'Promoção' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ delay: 0.5, duration: 0.5 }}
+                        className="absolute top-12 left-1/2 -translate-x-1/2 z-30"
+                      >
+                        <div className="bg-pink-500 text-white px-6 py-2 rounded-2xl shadow-2xl border border-pink-400 flex flex-col items-center leading-none">
+                          <span className="text-[8px] md:text-[10px] uppercase font-black tracking-widest mb-1">Oferta Especial</span>
+                          <span className="text-sm md:text-xl font-black">
+                            R$ {heroCarouselProducts[currentHeroImage].price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
                 </AnimatePresence>
 
                 {/* Carousel Indicators */}
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20 overflow-hidden px-2 py-1">
-                  {heroCarouselImages.slice(0, 10).map((_, idx) => (
+                  {heroCarouselProducts.slice(0, 10).map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => setCurrentHeroImage(idx)}
