@@ -297,8 +297,8 @@ export default function App() {
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
             {[
               { step: '01', title: 'Escolha', desc: 'Navegue pelos temas e selecione o kit perfeito para sua celebração.' },
-              { step: '02', title: 'Reserve', desc: 'Reserve o kit com antecedência para garantir a data da sua festa.' },
-              { step: '03', title: 'Retire', desc: 'Retire o kit completo e limpo em nosso ponto de entrega.' },
+              { step: '02', title: 'Reserve', desc: 'Adicione o item no carrinho e reserve o item com antecedência e entre em contato.' },
+              { step: '03', title: 'Entrega', desc: 'Apos o contato e finalização entregamos seu kit com todo cuidado.' },
               { step: '04', title: 'Celebre', desc: 'Monte do seu jeito e aproveite momentos inesquecíveis!' }
             ].map((item, idx) => (
               <div key={idx} className="relative p-6 md:p-8 bg-gray-50 rounded-[2rem] md:rounded-[2.5rem] border border-gray-100 hover:border-pink-200 transition-colors group">
