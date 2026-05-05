@@ -11,6 +11,7 @@ import Cart from './components/Cart';
 import Testimonials from './components/Testimonials';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import FloatingCart from './components/FloatingCart';
+import ScrollToTop from './components/ScrollToTop';
 import ReviewForm from './components/ReviewForm';
 import ImageModal from './components/ImageModal';
 import { PRODUCTS, REVIEWS, CATEGORIES, TESTIMONIAL_IMAGES } from './data/mockData';
@@ -374,6 +375,7 @@ export default function App() {
 
       <FloatingWhatsApp />
       <FloatingCart count={cartCount} onClick={() => setIsCartOpen(true)} />
+      <ScrollToTop />
 
       <ReviewForm
         isOpen={isReviewModalOpen}
