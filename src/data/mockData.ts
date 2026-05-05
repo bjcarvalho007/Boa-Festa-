@@ -45,7 +45,7 @@ export const PRODUCTS: Product[] = [
   {
     id: '13',
     name: 'Trio de Cilindros - Floral Rosa',
-    description: 'Kit sem o Painel! Somente 3 Cilindros com capas personalizadas em tons de rosa e boleiras combinando.',
+    description: 'Kit sem o Painel 1.50x1.50!Somente Cilindros - Capa para os Cilindros - E Boleiras!',
     price: 60.00,
     category: 'Cilindros & Boleiras',
     image: 'https://lh3.googleusercontent.com/d/1UpA8onOReGqRZAMqKYvhnYBOhiWXgWk_',
@@ -53,7 +53,7 @@ export const PRODUCTS: Product[] = [
   {
     id: '14',
     name: 'Trio de Cilindros - Luxo Dourado',
-    description: 'Kit sem o Painel! Inclui Capas para os Cilindros com texturas elegantes e Boleiras douradas de destaque.',
+    description: 'Kit sem o Painel 1.50x1.50!Somente Cilindros - Capa para os Cilindros - E Boleiras!',
     price: 60.00,
     category: 'Cilindros & Boleiras',
     image: 'https://lh3.googleusercontent.com/d/1oE8bNv2aHBcN4M43sCsjxyY9KgrHAf9A',
