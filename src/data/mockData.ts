@@ -36,8 +36,8 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: '17',
-    name: 'Combo Promo - Reino Mágico',
-    description: 'Kit encantado com painel e cilindros personalizados. Valor promocional para reserva rápida! (Não trabalhamos com arco de balões)',
+    name: 'Combo Promo - Unicórnio',
+    description: 'Kit encantado do Unicórnio com painel e cilindros personalizados. Valor promocional para reserva rápida! (Não trabalhamos com arco de balões)',
     price: 80.00,
     category: 'Promoção',
     image: 'https://lh3.googleusercontent.com/d/1_TaOZJIMGdPI9qMxKsodrNbWv0eNfF8E',
@@ -164,8 +164,8 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: '19',
-    name: 'Kit Pequena Sereia',
-    description: 'Magia sob o mar! Decoração encantadora com tons de sereia e painel maravilhoso.',
+    name: 'Kit Moranguinho',
+    description: 'A doçura da Moranguinho na sua festa! Decoração encantadora com tons vibrantes e painel maravilhoso.',
     price: 40.00,
     category: 'Festa',
     image: 'https://lh3.googleusercontent.com/d/1aPa6qprKAHjnt7gwcT7wgC8TT8nla90j',
