@@ -149,7 +149,7 @@ export const PRODUCTS: Product[] = [
   {
     id: '12',
     name: 'Kit Natal Mágico',
-    description: 'Kit Feliz Natal completo. De R$ 120,00 por apenas R$ 80,00! Aproveite a promoção. ( não trabalhamos com arco de balões! )',
+    description: 'Kit Feliz Natal completo. Aproveite a promoção. ( não trabalhamos com arco de balões! )',
     price: 80.00,
     category: 'Promoção',
     image: 'https://lh3.googleusercontent.com/d/1NGbvPG9gf_r8uY_5JEB9Duz3ChDKJ0r4',

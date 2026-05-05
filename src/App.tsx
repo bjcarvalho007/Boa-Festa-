@@ -187,6 +187,9 @@ export default function App() {
                       >
                         <div className="bg-pink-500 text-white px-6 py-2 rounded-2xl shadow-2xl border border-pink-400 flex flex-col items-center leading-none">
                           <span className="text-[8px] md:text-[10px] uppercase font-black tracking-widest mb-1">Oferta Especial</span>
+                          <span className="text-[10px] md:text-xs line-through opacity-70 mb-0.5">
+                            R$ 120,00
+                          </span>
                           <span className="text-sm md:text-xl font-black">
                             R$ {heroCarouselProducts[currentHeroImage].price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                           </span>

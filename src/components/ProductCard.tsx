@@ -70,7 +70,12 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
             {product.name}
           </h3>
           <div className="flex flex-col items-end">
-            <span className="text-base md:text-lg font-black text-pink-500 whitespace-nowrap">
+            {product.category === 'Promoção' && (
+              <span className="text-[10px] md:text-xs line-through text-gray-300 font-bold leading-none mb-0.5">
+                R$ 120,00
+              </span>
+            )}
+            <span className="text-base md:text-lg font-black text-pink-500 whitespace-nowrap leading-none">
               R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </span>
             <span className="text-[9px] font-bold text-gray-300 uppercase tracking-tighter">Reserva</span>
