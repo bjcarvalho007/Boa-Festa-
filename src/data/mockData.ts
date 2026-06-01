@@ -170,6 +170,14 @@ export const PRODUCTS: Product[] = [
     category: 'Festa na mesa',
     image: 'https://lh3.googleusercontent.com/d/1aPa6qprKAHjnt7gwcT7wgC8TT8nla90j',
   },
+  {
+    id: '20',
+    name: 'Kit Arraiá & CBF Seleção',
+    description: 'Perfeito para o seu Arraiá e para assistir ao jogo da CBF! Promoção especial do mês de junho. ( não trabalhamos com arco de balões! )',
+    price: 40.00,
+    category: 'Festa na mesa',
+    image: 'https://lh3.googleusercontent.com/d/1eBElzbsUjvOs3xVVSYqOMUsP2p0sdh9C',
+  },
 ];
 
 export const REVIEWS: Review[] = [
