@@ -14,13 +14,19 @@ import FloatingCart from './components/FloatingCart';
 import ScrollToTop from './components/ScrollToTop';
 import ReviewForm from './components/ReviewForm';
 import ImageModal from './components/ImageModal';
+import AdminLoginModal from './components/AdminLoginModal';
+import AdminProductModal from './components/AdminProductModal';
 import { PRODUCTS, REVIEWS, CATEGORIES, TESTIMONIAL_IMAGES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
 import { getImageUrl } from './utils/image';
-import { ArrowRight, Sparkles, Instagram, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { ArrowRight, Sparkles, Instagram, Mail, MapPin, MessageCircle, Lock, LogOut, Plus } from 'lucide-react';
 import { CONTACT_EMAIL, WHATSAPP_NUMBER, WHATSAPP_DEV_NUMBER, WHATSAPP_MESSAGE } from './constants';
 
 export default function App() {
+  const [products, setProducts] = useState<Product[]>(() => {
+    const saved = localStorage.getItem('boa_festa_products');
+    return saved ? JSON.parse(saved) : PRODUCTS;
+  });
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,17 +35,31 @@ export default function App() {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState<{ src: string; alt: string } | null>(null);
 
+  // Admin authentication and mod states
+  const [isAdmin, setIsAdmin] = useState(() => {
+    return sessionStorage.getItem('boa_festa_admin') === 'true';
+  });
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
+  const [isAdminProductOpen, setIsAdminProductOpen] = useState(false);
+  const [selectedProductForEdit, setSelectedProductForEdit] = useState<Product | null>(null);
+
   const cartCount = useMemo(() => cartItems.reduce((acc, item) => acc + item.quantity, 0), [cartItems]);
   
   // Use only images from the actual product database, shuffled for variety
   const heroCarouselProducts = useMemo(() => {
     // Simple shuffle algorithm
-    return [...PRODUCTS].sort(() => Math.random() - 0.5);
-  }, []);
+    return [...products].sort(() => Math.random() - 0.5);
+  }, [products]);
 
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
 
+  // Reset caravan index if product list changes
   useEffect(() => {
+    setCurrentHeroImage(0);
+  }, [heroCarouselProducts.length]);
+
+  useEffect(() => {
+    if (heroCarouselProducts.length === 0) return;
     const timer = setInterval(() => {
       setCurrentHeroImage((prev) => (prev + 1) % heroCarouselProducts.length);
     }, 5000);
@@ -47,13 +67,28 @@ export default function App() {
   }, [heroCarouselProducts.length]);
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           product.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'Todos' || product.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [products, searchQuery, selectedCategory]);
+
+  // Compute categories dynamically so custom categories created by admin show up automatically
+  const dynamicCategories = useMemo(() => {
+    const fromProducts = Array.from(new Set(products.map(p => p.category as string))) as string[];
+    const baseList = CATEGORIES.filter(c => c !== 'Todos');
+    
+    const union = [...baseList];
+    fromProducts.forEach(cat => {
+      if (!union.includes(cat)) {
+        union.push(cat);
+      }
+    });
+    
+    return ['Todos', ...union];
+  }, [products]);
 
   const handleAddToCart = (product: Product, quantity: number = 1) => {
     setCartItems((prev) => {
@@ -87,13 +122,83 @@ export default function App() {
     setReviews((prev) => [reviewWithId, ...prev]);
   };
 
+  const handleAdminLoginSuccess = () => {
+    setIsAdmin(true);
+    sessionStorage.setItem('boa_festa_admin', 'true');
+  };
+
+  const handleLogout = () => {
+    setIsAdmin(false);
+    sessionStorage.removeItem('boa_festa_admin');
+  };
+
+  const handleSaveProduct = (updatedProduct: Omit<Product, 'id'> & { id?: string }) => {
+    setProducts((prev) => {
+      let next;
+      if (updatedProduct.id) {
+        next = prev.map((p) => (p.id === updatedProduct.id ? (updatedProduct as Product) : p));
+      } else {
+        const item: Product = { ...updatedProduct, id: Date.now().toString() };
+        next = [item, ...prev];
+      }
+      localStorage.setItem('boa_festa_products', JSON.stringify(next));
+      return next;
+    });
+    setSelectedProductForEdit(null);
+  };
+
+  const handleDeleteProduct = (id: string) => {
+    setProducts((prev) => {
+      const next = prev.filter((p) => p.id !== id);
+      localStorage.setItem('boa_festa_products', JSON.stringify(next));
+      return next;
+    });
+    setSelectedProductForEdit(null);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Navbar
         cartCount={cartCount}
         onCartClick={() => setIsCartOpen(true)}
         onSearch={setSearchQuery}
+        isAdmin={isAdmin}
+        onAdminClick={() => setIsAdminLoginOpen(true)}
+        onLogout={handleLogout}
       />
+
+      {isAdmin && (
+        <div className="bg-gray-900 border-b border-gray-800 text-white py-3.5 px-6 sticky top-[68px] sm:top-[88px] z-[45] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-lg font-sans">
+          <div className="flex items-center gap-2">
+            <span className="flex h-2.5 w-2.5 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+            </span>
+            <span className="font-bold tracking-wider uppercase text-[10px] text-gray-305">
+              Modo Administrador Ativado
+            </span>
+          </div>
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+            <button
+              onClick={() => {
+                setSelectedProductForEdit(null);
+                setIsAdminProductOpen(true);
+              }}
+              className="w-full sm:w-auto bg-pink-500 hover:bg-pink-600 active:scale-95 text-white font-black text-[9px] uppercase tracking-widest px-4 py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer"
+            >
+              <Plus size={12} className="stroke-[2.5]" />
+              Cadastrar Novo Tema
+            </button>
+            <button
+              onClick={handleLogout}
+              className="text-gray-405 hover:text-white font-bold text-[9px] uppercase tracking-widest flex items-center justify-center gap-1 px-2 py-1.5 transition-colors cursor-pointer"
+            >
+              <LogOut size={12} />
+              Sair
+            </button>
+          </div>
+        </div>
+      )}
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -233,9 +338,13 @@ export default function App() {
         </section>
 
         {/* Categories Bar - Sticky feeling */}
-        <div id="catalogo" className="bg-white border-y border-gray-100 py-4 px-4 overflow-x-auto no-scrollbar sticky top-[68px] md:top-[88px] z-40 backdrop-blur-md bg-white/95">
+        <div 
+          id="catalogo" 
+          className="bg-white border-y border-gray-100 py-4 px-4 overflow-x-auto no-scrollbar sticky z-40 backdrop-blur-md bg-white/95"
+          style={{ top: isAdmin ? '128px' : '68px' }}
+        >
           <div className="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-6 md:gap-10 min-w-max px-2 md:px-0">
-            {CATEGORIES.map((cat) => (
+            {dynamicCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
@@ -267,12 +376,42 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
             <AnimatePresence mode="popLayout">
+              {isAdmin && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  onClick={() => {
+                    setSelectedProductForEdit(null);
+                    setIsAdminProductOpen(true);
+                  }}
+                  className="group cursor-pointer border-2 border-dashed border-pink-300 rounded-[2rem] md:rounded-[3rem] p-8 flex flex-col items-center justify-center text-center gap-4 bg-white/50 hover:bg-pink-100/10 hover:border-pink-500 transition-all duration-500 min-h-[350px] aspect-[1/1.1] sm:aspect-auto"
+                >
+                  <div className="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 group-hover:scale-110 transition-transform">
+                    <Plus size={26} className="stroke-[2.5]" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-black text-sm uppercase tracking-tight text-gray-900">
+                      Cadastrar Novo Tema
+                    </h3>
+                    <p className="text-[11px] text-gray-400 mt-2 max-w-[200px] leading-relaxed mx-auto font-medium">
+                      Clique aqui para adicionar um novo kit de decoração ao seu catálogo.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                   onAddToCart={handleAddToCart}
                   onImageClick={(src, alt) => setPreviewImage({ src, alt })}
+                  isAdmin={isAdmin}
+                  onEdit={(p) => {
+                    setSelectedProductForEdit(p);
+                    setIsAdminProductOpen(true);
+                  }}
                 />
               ))}
             </AnimatePresence>
@@ -354,6 +493,17 @@ export default function App() {
               <p className="text-[10px] text-gray-600 uppercase tracking-[0.2em] mb-4">
                 Desenvolvido por: <span className="font-black text-gray-900">B.J.C</span>
               </p>
+              
+              {/* Discreet entry for Admin login */}
+              <button
+                onClick={() => setIsAdminLoginOpen(true)}
+                className="text-[9px] text-gray-300 hover:text-pink-400 font-bold uppercase tracking-widest flex items-center gap-1.5 transition-colors pb-6"
+                title="Acesso Restrito"
+              >
+                <Lock size={10} />
+                Acesso Restrito
+              </button>
+
               <a 
                 href={`https://wa.me/${WHATSAPP_DEV_NUMBER}?text=${encodeURIComponent("Olá! Vi o site da Boa Festa e gostaria de saber mais sobre a criação de sites.")}`}
                 target="_blank"
@@ -391,6 +541,24 @@ export default function App() {
         onClose={() => setPreviewImage(null)}
         imageSrc={previewImage?.src || ''}
         imageAlt={previewImage?.alt || ''}
+      />
+
+      {/* Administrative System Modals */}
+      <AdminLoginModal
+        isOpen={isAdminLoginOpen}
+        onClose={() => setIsAdminLoginOpen(false)}
+        onLoginSuccess={handleAdminLoginSuccess}
+      />
+
+      <AdminProductModal
+        isOpen={isAdminProductOpen}
+        onClose={() => {
+          setIsAdminProductOpen(false);
+          setSelectedProductForEdit(null);
+        }}
+        onSave={handleSaveProduct}
+        onDelete={handleDeleteProduct}
+        product={selectedProductForEdit}
       />
     </div>
   );
