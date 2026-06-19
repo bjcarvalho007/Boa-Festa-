@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Plus, Minus, ShoppingCart, Edit } from 'lucide-react';
+import { Plus, Minus, ShoppingCart } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Product } from '../types';
@@ -13,12 +13,10 @@ interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product, quantity: number) => void;
   onImageClick?: (image: string, name: string) => void;
-  isAdmin?: boolean;
-  onEdit?: (product: Product) => void;
   key?: string | number;
 }
 
-export default function ProductCard({ product, onAddToCart, onImageClick, isAdmin, onEdit }: ProductCardProps) {
+export default function ProductCard({ product, onAddToCart, onImageClick }: ProductCardProps) {
   const [quantity, setQuantity] = useState(1);
 
   const adjustQuantity = (amount: number) => {
@@ -64,21 +62,6 @@ export default function ProductCard({ product, onAddToCart, onImageClick, isAdmi
             {product.category}
           </span>
         </div>
-        {isAdmin && onEdit && (
-          <div className="absolute top-4 right-4 z-20">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onEdit(product);
-              }}
-              className="bg-pink-500 hover:bg-black text-white p-2.5 rounded-full border border-pink-450 shadow-xl flex items-center justify-center transition-colors duration-300 transform active:scale-95"
-              title="Editar Tema"
-            >
-              <Edit size={14} className="stroke-[2.5]" />
-            </button>
-          </div>
-        )}
       </div>
 
       <div className="p-6 md:p-10 flex flex-col flex-1">

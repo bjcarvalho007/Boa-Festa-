@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react';
-import { ShoppingCart, Search, Menu, Phone, Instagram, X, Mail, Lock, LogOut } from 'lucide-react';
+import { ShoppingCart, Search, Menu, Phone, Instagram, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CONTACT_EMAIL } from '../constants';
 
@@ -12,12 +12,9 @@ interface NavbarProps {
   cartCount: number;
   onCartClick: () => void;
   onSearch: (query: string) => void;
-  isAdmin?: boolean;
-  onAdminClick?: () => void;
-  onLogout?: () => void;
 }
 
-export default function Navbar({ cartCount, onCartClick, onSearch, isAdmin, onAdminClick, onLogout }: NavbarProps) {
+export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -42,26 +39,6 @@ export default function Navbar({ cartCount, onCartClick, onSearch, isAdmin, onAd
 
         {/* Lado Direito: Ações e Botão Menu Mobile */}
         <div className="flex items-center gap-2 md:gap-4 flex-1 justify-end">
-          {isAdmin ? (
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={onLogout}
-              className="hidden sm:flex p-3 bg-red-50 text-red-600 border border-red-100 rounded-full hover:bg-red-100 transition-colors shadow-sm"
-              title="Sair do Painel Admin"
-            >
-              <LogOut size={18} />
-            </motion.button>
-          ) : (
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={onAdminClick}
-              className="hidden sm:flex p-3 bg-gray-50 text-gray-400 rounded-full hover:text-pink-500 hover:bg-pink-50 transition-all border border-gray-100 shadow-sm"
-              title="Acesso Administrativo"
-            >
-              <Lock size={18} />
-            </motion.button>
-          )}
-
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={onCartClick}
@@ -115,27 +92,6 @@ export default function Navbar({ cartCount, onCartClick, onSearch, isAdmin, onAd
                 <a href="#catalogo" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold uppercase tracking-tighter hover:text-pink-500">Nossos Temas</a>
                 <a href="#como-funciona" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold uppercase tracking-tighter hover:text-pink-500">Como Funciona</a>
                 <a href="#depoimentos" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold uppercase tracking-tighter hover:text-pink-500">Quem já Alugou</a>
-                
-                {/* Admin option inside Mobile menu for ease of access */}
-                <div className="pt-4 border-t border-gray-100">
-                  {isAdmin ? (
-                    <button 
-                      onClick={() => { setIsMenuOpen(false); onLogout?.(); }} 
-                      className="text-xl font-bold uppercase tracking-tighter text-red-650 flex items-center gap-3 w-full text-left"
-                    >
-                      <LogOut size={20} className="text-red-500" />
-                      Sair do Admin
-                    </button>
-                  ) : (
-                    <button 
-                      onClick={() => { setIsMenuOpen(false); onAdminClick?.(); }} 
-                      className="text-xl font-bold uppercase tracking-tighter text-gray-500 flex items-center gap-3 w-full text-left hover:text-pink-500"
-                    >
-                      <Lock size={20} className="text-pink-500" />
-                      Painel Administrativo
-                    </button>
-                  )}
-                </div>
               </div>
 
               <div className="mt-auto pt-8 border-t border-gray-100 italic">
